@@ -5,3 +5,9 @@
 ## Setup
 
 For the Advent of Code API to work, a session key needs to be stored in `/aoc-conf.yaml`.
+
+Use the following format for the file:
+
+```yaml
+session: YOUR_KEY_HERE
+```
