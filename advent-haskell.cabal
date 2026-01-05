@@ -1,35 +1,32 @@
-cabal-version:       2.2
-
-name:                advent-haskell
-version:             0.1.0.0
--- synopsis:
--- description:
-homepage:            https://github.com/neillrobson/advent-haskell#readme
-license:             BSD-3-Clause
-license-file:        LICENSE
-author:              Neill Robson
-maintainer:          neill@neillrobson.com
-copyright:           2025 - Present
-category:            education
-build-type:          Simple
-extra-source-files:  README.md
-                     CHANGELOG.md
-
-executable advent-haskell
-  hs-source-dirs:      src
-  main-is:             Main.hs
-  default-language:    Haskell2010
-  build-depends:       base >= 4.7 && < 5
-  ghc-options:         -Wall
-                       -Wcompat
-                       -Widentities
-                       -Wincomplete-record-updates
-                       -Wincomplete-uni-patterns
-                       -Wmissing-export-lists
-                       -Wmissing-home-modules
-                       -Wpartial-fields
-                       -Wredundant-constraints
+cabal-version:      2.2
+name:               advent-haskell
+version:            0.1.0.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+copyright:          2025 - Present
+maintainer:         neill@neillrobson.com
+author:             Neill Robson
+homepage:           https://github.com/neillrobson/advent-haskell#readme
+category:           education
+build-type:         Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
 
 source-repository head
-  type:     git
-  location: https://github.com/neillrobson/advent-haskell
+    type:     git
+    location: https://github.com/neillrobson/advent-haskell
+
+executable advent-haskell
+    main-is:          Main.hs
+    hs-source-dirs:   src
+    default-language: Haskell2010
+    ghc-options:
+        -Wall -Wcompat -Widentities -Wincomplete-record-updates
+        -Wincomplete-uni-patterns -Wmissing-export-lists
+        -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+
+    build-depends:
+        advent-of-code-api,
+        base >=4.7 && <5,
+        bytestring ^>=0.12.2.0
