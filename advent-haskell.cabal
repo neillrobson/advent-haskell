@@ -31,4 +31,6 @@ executable advent-haskell
         aeson ^>=2.2.3.0,
         base >=4.7 && <5,
         bytestring ^>=0.12.2.0,
+        containers,
+        text,
         yaml ^>=0.11.11.2,

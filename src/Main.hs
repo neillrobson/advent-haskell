@@ -1,11 +1,15 @@
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE OverloadedStrings #-}
 
-module Main (main) where
+module Main (session, main) where
 
-import Control.Exception
-import Control.Monad
+import Advent (AoC (AoCPrompt), AoCUserAgent (AoCUserAgent), Part (Part1), defaultAoCOpts, mkDay_, runAoC)
+import Control.Exception (tryJust)
+import Control.Monad (guard)
 import qualified Data.Aeson as A
 import qualified Data.ByteString as BS
+import Data.Map ((!))
+import Data.Text (unpack)
 import qualified Data.Yaml as Y
 import GHC.Generics (Generic)
 import System.IO.Error (isDoesNotExistError)
@@ -46,9 +50,22 @@ configFile fp = do
           return def
         Right cfg -> return cfg
 
+session :: FilePath -> IO (Maybe String)
+session = (fmap _cfgSession) . configFile
+
+--------------------------------------------------------------------------------
+
+aocUserAgent :: AoCUserAgent
+aocUserAgent = AoCUserAgent "github.com/neillrobson/advent-haskell" "neill@neillrobson.com"
+
 main :: IO ()
 main = do
-  cfg <- configFile defaultConfPath
-  case _cfgSession cfg of
-    Nothing -> putStrLn "Not found!"
-    Just key -> putStrLn key
+  key <- session defaultConfPath
+  case key of
+    Nothing -> putStrLn "No key given"
+    Just k -> do
+      let aocOpts = defaultAoCOpts aocUserAgent 2015 k
+      prompt <- runAoC aocOpts $ AoCPrompt (mkDay_ 1)
+      case prompt of
+        Left err -> putStrLn $ show err
+        Right pMap -> putStrLn $ unpack $ pMap ! Part1
