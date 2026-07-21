@@ -18,3 +18,22 @@ Although the solutions to the puzzles themselves are all purely my own, the scaf
 interacting with the AoC API and organizing solutions is heavily inspired by Justin Le's
 [advent-of-code](https://github.com/mstksg/advent-of-code) repository. I am grateful for their
 generous sharing of their Haskell knowledge!
+
+## Notes & Learnings
+
+### Template Haskell
+
+To view and debug splice output outside the terminal on a per-file basis:
+
+1. Add the following GHC options to the top of the file:
+
+    ```haskell
+    {-# OPTIONS_GHC -ddump-splices #-}
+    {-# OPTIONS_GHC -ddump-to-file #-}
+    ```
+
+2. Trigger a build, e.g. with `stack build`.
+
+3. Locate the `.dump-splices` file deep within the `.stack-work` directory. For example, the dump
+   for the `Sandbox.Splices` module appears in `.stack-work/dist/{{env
+   info}}/build/advent-haskell/advent-haskell-tmp/src/Sandbox/Splices.dump-splices`
