@@ -27,10 +27,12 @@ executable advent-haskell
   main-is: Main.hs
   other-modules:
       AOC2015.Day01
+      Sandbox.Splices
       Sandbox.Templates
   hs-source-dirs:
       src
   default-extensions:
+      TemplateHaskell
       ViewPatterns
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:

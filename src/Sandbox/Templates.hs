@@ -1,4 +1,4 @@
-module Sandbox.Templates () where
+module Sandbox.Templates (precompute) where
 
 import Language.Haskell.TH
 
