@@ -3,6 +3,6 @@
 
 module Sandbox.Splices () where
 
-import Sandbox.Templates (precompute)
+import Sandbox.Templates (bigBadMathProblem, precompute)
 
 $(precompute [1 .. 10])

@@ -1,4 +1,4 @@
-module Sandbox.Templates (precompute) where
+module Sandbox.Templates (bigBadMathProblem, precompute) where
 
 import Language.Haskell.TH
 
@@ -29,5 +29,10 @@ precompute xs = do
   let name = mkName "lookupTable"
   let patterns = map intToPat xs
   let bodies = map precomputeInteger xs
-  let clauses = zipWith (\pat body -> Clause [pat] (NormalB body) []) patterns bodies
+  let fallbackArgName = mkName "x"
+  let bbmpName = mkName "bigBadMathProblem"
+  let fallbackBodyExp = AppE (VarE bbmpName) (VarE fallbackArgName)
+  let lastClause = Clause [VarP fallbackArgName] (NormalB fallbackBodyExp) []
+  let precomputedClauses = zipWith (\pat body -> Clause [pat] (NormalB body) []) patterns bodies
+  let clauses = precomputedClauses ++ [lastClause]
   return [FunD name clauses]
