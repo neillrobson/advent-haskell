@@ -1,0 +1,44 @@
+name: advent-haskell
+version: 0.1.0.0
+github: neillrobson/advent-haskell
+author: Neill Robson
+maintainer: neill@neillrobson.com
+license: BSD-3-Clause
+copyright: 2025 - Present
+extra-source-files:
+  - README.md
+  - CHANGELOG.md
+
+description: Please see the README on GitHub at
+  <https://github.com/neillrobson/advent-haskell#readme>
+
+spec-version: 0.39.1
+
+dependencies:
+  - advent-of-code-api
+  - aeson ^>=2.2.3.0
+  - base >=4.7 && <5
+  - bytestring ^>=0.12.2.0
+  - containers
+  - deepseq
+  - text
+  - yaml ^>=0.11.11.2
+
+ghc-options:
+  - -Wall
+  - -Wcompat
+  - -Widentities
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wmissing-export-lists
+  - -Wmissing-home-modules
+  - -Wpartial-fields
+  - -Wredundant-constraints
+
+default-extensions:
+  - ViewPatterns
+
+executables:
+  advent-haskell:
+    source-dirs: src
+    main: Main.hs

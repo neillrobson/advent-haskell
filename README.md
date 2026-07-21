@@ -14,5 +14,7 @@ session: YOUR_KEY_HERE
 
 ## Inspiration
 
-Although the solutions to the puzzles themselves are all purely my own, the scaffolding for interacting with the AoC API and organizing solutions is heavily inspired by Justin Le's [advent-of-code](https://github.com/mstksg/advent-of-code) repository.
-I am grateful for their generous sharing of their Haskell knowledge!
+Although the solutions to the puzzles themselves are all purely my own, the scaffolding for
+interacting with the AoC API and organizing solutions is heavily inspired by Justin Le's
+[advent-of-code](https://github.com/mstksg/advent-of-code) repository. I am grateful for their
+generous sharing of their Haskell knowledge!
