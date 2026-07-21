@@ -3,11 +3,18 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/topics/lock_files
 
-packages: []
+packages:
+- completed:
+    hackage: advent-of-code-api-0.2.11.0@sha256:4e02ef144833014de042b14fe3209a89ca14bfe03b466340d9d2e2b8c4d7bd34,2276
+    pantry-tree:
+      sha256: 5de2285057858615448e5e0fe0724948ee7a09f5184d6c84d886119c5928ee39
+      size: 1185
+  original:
+    hackage: advent-of-code-api-0.2.11.0
 snapshots:
 - completed:
-    sha256: d90eb1418667a225998b173817300e5ae2e1500ed03c0a9457cc2a0e78a0122a
-    size: 726337
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/24/26.yaml
+    sha256: 238fa745b64f91184f9aa518fe04bdde6552533d169b0da5256670df83a0f1a9
+    size: 721141
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/22/44.yaml
   original:
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/24/26.yaml
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/22/44.yaml

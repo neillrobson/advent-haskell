@@ -16,14 +16,14 @@ spec-version: 0.39.1
 
 dependencies:
   - advent-of-code-api
-  - aeson ^>=2.2.3.0
+  - aeson
   - base >=4.7 && <5
-  - bytestring ^>=0.12.2.0
+  - bytestring
   - containers
   - deepseq
   - text
   - template-haskell
-  - yaml ^>=0.11.11.2
+  - yaml
 
 ghc-options:
   - -Wall

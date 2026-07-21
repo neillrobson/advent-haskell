@@ -3,7 +3,8 @@ module AOC2015.Day01 (run) where
 import Control.Applicative (Alternative (empty))
 import Control.DeepSeq (force)
 import Control.Exception (evaluate, tryJust)
-import Control.Monad (guard)
+import Control.Monad (guard, (<=<))
+import Data.List (foldl')
 import System.IO.Error (isDoesNotExistError)
 
 --------------------------------------------------------------------------------
@@ -20,7 +21,7 @@ inputFilePath :: FilePath
 inputFilePath = "data/2015/01.txt"
 
 readFileMaybe :: FilePath -> IO (Maybe String)
-readFileMaybe = (traverse (evaluate . force) . eitherToMaybe =<<) . tryJust (guard . isDoesNotExistError) . readFile
+readFileMaybe = (traverse (evaluate . force) . eitherToMaybe) <=< tryJust (guard . isDoesNotExistError) . readFile
 
 --------------------------------------------------------------------------------
 
@@ -39,4 +40,4 @@ run = do
     Nothing -> putStrLn "cannot read input"
     Just (stripNewline -> inp) -> do
       putStrLn inp
-      putStrLn $ show $ level inp
+      print $ level inp

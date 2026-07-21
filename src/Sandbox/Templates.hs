@@ -22,7 +22,7 @@ intToPat :: Int -> Pat
 intToPat = LitP . IntegerL . toInteger
 
 precomputeInteger :: Int -> Exp
-precomputeInteger = LitE . DoublePrimL . toRational . bigBadMathProblem
+precomputeInteger = LitE . RationalL . toRational . bigBadMathProblem
 
 precompute :: [Int] -> DecsQ
 precompute xs = do
