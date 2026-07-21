@@ -1,21 +1,15 @@
-{-# LANGUAGE ViewPatterns #-}
-
 module AOC2015.Day01 (run) where
 
 import Control.Applicative (Alternative (empty))
 import Control.DeepSeq (force)
 import Control.Exception (evaluate, tryJust)
 import Control.Monad (guard)
-import qualified Data.Text as T
 import System.IO.Error (isDoesNotExistError)
 
 --------------------------------------------------------------------------------
 
 eitherToMaybe :: (Alternative m) => Either e a -> m a
 eitherToMaybe = either (const empty) pure
-
-strip :: String -> String
-strip = T.unpack . T.strip . T.pack
 
 stripNewline :: String -> String
 stripNewline = reverse . dropWhile (== '\n') . reverse
