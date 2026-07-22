@@ -27,6 +27,7 @@ precomputeInteger = LitE . RationalL . toRational . bigBadMathProblem
 
 precompute :: [Int] -> DecsQ
 precompute xs = do
+  fnType <- [t|Int -> Double|]
   let name = mkName "lookupTable"
       patterns = map intToPat xs
       bodies = map precomputeInteger xs
@@ -36,6 +37,5 @@ precompute xs = do
       lastClause = Clause [VarP fallbackArgName] (NormalB fallbackBodyExp) []
       precomputedClauses = zipWith (\pat body -> Clause [pat] (NormalB body) []) patterns bodies
       clauses = precomputedClauses ++ [lastClause]
-      fnType = AppT (AppT ArrowT (ConT $ mkName "Int")) (ConT $ mkName "Double")
       signature = SigD name fnType
   return [signature, FunD name clauses]
