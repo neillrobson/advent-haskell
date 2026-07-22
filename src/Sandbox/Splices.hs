@@ -1,7 +1,7 @@
 {-# OPTIONS_GHC -ddump-splices #-}
 {-# OPTIONS_GHC -ddump-to-file #-}
 
-module Sandbox.Splices () where
+module Sandbox.Splices (lookupTable) where
 
 import Sandbox.Templates (bigBadMathProblem, precompute)
 

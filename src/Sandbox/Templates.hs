@@ -1,11 +1,12 @@
 module Sandbox.Templates (bigBadMathProblem, precompute) where
 
+import Debug.Trace (trace)
 import Language.Haskell.TH
 
 -- Source: https://www.parsonsmatt.org/2015/11/15/template_haskell.html
 
 bigBadMathProblem :: Int -> Double
-bigBadMathProblem = (2 /) . fromIntegral
+bigBadMathProblem = trace "calling bigBadMathProblem" . (2 /) . fromIntegral
 
 {-
 Desired output of precompute:
@@ -27,12 +28,12 @@ precomputeInteger = LitE . RationalL . toRational . bigBadMathProblem
 precompute :: [Int] -> DecsQ
 precompute xs = do
   let name = mkName "lookupTable"
-  let patterns = map intToPat xs
-  let bodies = map precomputeInteger xs
-  let fallbackArgName = mkName "x"
-  let bbmpName = mkName "bigBadMathProblem"
-  let fallbackBodyExp = AppE (VarE bbmpName) (VarE fallbackArgName)
-  let lastClause = Clause [VarP fallbackArgName] (NormalB fallbackBodyExp) []
-  let precomputedClauses = zipWith (\pat body -> Clause [pat] (NormalB body) []) patterns bodies
-  let clauses = precomputedClauses ++ [lastClause]
+      patterns = map intToPat xs
+      bodies = map precomputeInteger xs
+      fallbackArgName = mkName "x"
+      bbmpName = mkName "bigBadMathProblem"
+      fallbackBodyExp = AppE (VarE bbmpName) (VarE fallbackArgName)
+      lastClause = Clause [VarP fallbackArgName] (NormalB fallbackBodyExp) []
+      precomputedClauses = zipWith (\pat body -> Clause [pat] (NormalB body) []) patterns bodies
+      clauses = precomputedClauses ++ [lastClause]
   return [FunD name clauses]
