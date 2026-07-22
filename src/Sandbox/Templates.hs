@@ -1,4 +1,4 @@
-module Sandbox.Templates (bigBadMathProblem, precompute) where
+module Sandbox.Templates (precompute, pretwo) where
 
 import Debug.Trace (trace)
 import Language.Haskell.TH
@@ -39,3 +39,23 @@ precompute xs = do
       clauses = precomputedClauses ++ [lastClause]
   signature <- sigD name [t|Int -> Double|]
   return [signature, FunD name clauses]
+
+intToQPat :: Int -> PatQ
+intToQPat = litP . integerL . toInteger
+
+intToQExp :: Int -> ExpQ
+intToQExp = litE . rationalL . toRational . bigBadMathProblem
+
+pretwo :: [Int] -> DecsQ
+pretwo xs = sequence [signature, funD name clauses]
+  where
+    name = mkName "lookupTableTwo"
+    signature = sigD name [t|Int -> Double|]
+    patterns = map intToQPat xs
+    bodies = map intToQExp xs
+    precomputedClauses = zipWith (\pat body -> clause [pat] (normalB body) []) patterns bodies
+    lastClause = do
+      arg <- newName "x"
+      let fallbackBodyExp = [e|bigBadMathProblem $(varE arg)|]
+      clause [varP arg] (normalB fallbackBodyExp) []
+    clauses = precomputedClauses ++ [lastClause]
