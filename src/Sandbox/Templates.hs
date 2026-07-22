@@ -28,14 +28,14 @@ precomputeInteger = LitE . RationalL . toRational . bigBadMathProblem
 
 precompute :: [Int] -> DecsQ
 precompute xs = do
-  fnType <- [t|Int -> Double|]
+  fallbackArgName <- newName "x"
+  lastClause <-
+    let fallbackBodyExp = [e|bigBadMathProblem $(varE fallbackArgName)|]
+     in clause [varP fallbackArgName] (normalB fallbackBodyExp) []
   let name = mkName "lookupTable"
       patterns = map intToPat xs
       bodies = map precomputeInteger xs
-      fallbackArgName = mkName "x"
-      fallbackBodyExp = AppE (VarE 'bigBadMathProblem) (VarE fallbackArgName)
-      lastClause = Clause [VarP fallbackArgName] (NormalB fallbackBodyExp) []
       precomputedClauses = zipWith (\pat body -> Clause [pat] (NormalB body) []) patterns bodies
       clauses = precomputedClauses ++ [lastClause]
-      signature = SigD name fnType
+  signature <- sigD name [t|Int -> Double|]
   return [signature, FunD name clauses]
