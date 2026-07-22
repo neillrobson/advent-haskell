@@ -3,6 +3,6 @@
 
 module Sandbox.Splices (lookupTable) where
 
-import Sandbox.Templates (bigBadMathProblem, precompute)
+import Sandbox.Templates (precompute)
 
 $(precompute [1 .. 10])

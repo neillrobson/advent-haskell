@@ -11,6 +11,7 @@ bigBadMathProblem = trace "calling bigBadMathProblem" . (2 /) . fromIntegral
 {-
 Desired output of precompute:
 
+lookupTable :: Int -> Double
 lookupTable 0 = 123.456
 lookupTable 12 = 151626.4234
 ...
@@ -32,8 +33,7 @@ precompute xs = do
       patterns = map intToPat xs
       bodies = map precomputeInteger xs
       fallbackArgName = mkName "x"
-      bbmpName = mkName "bigBadMathProblem"
-      fallbackBodyExp = AppE (VarE bbmpName) (VarE fallbackArgName)
+      fallbackBodyExp = AppE (VarE 'bigBadMathProblem) (VarE fallbackArgName)
       lastClause = Clause [VarP fallbackArgName] (NormalB fallbackBodyExp) []
       precomputedClauses = zipWith (\pat body -> Clause [pat] (NormalB body) []) patterns bodies
       clauses = precomputedClauses ++ [lastClause]
