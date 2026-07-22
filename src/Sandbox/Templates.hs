@@ -1,7 +1,8 @@
-module Sandbox.Templates (precompute, pretwo) where
+module Sandbox.Templates (precompute, pretwo, primesUpTo') where
 
 import Debug.Trace (trace)
 import Language.Haskell.TH
+import Sandbox.Primes (isPrime)
 
 -- Source: https://www.parsonsmatt.org/2015/11/15/template_haskell.html
 
@@ -59,3 +60,13 @@ pretwo xs = sequence [signature, funD name clauses]
       let fallbackBodyExp = [e|bigBadMathProblem $(varE arg)|]
       clause [varP arg] (normalB fallbackBodyExp) []
     clauses = precomputedClauses ++ [lastClause]
+
+--------------------------------------------------------------------------------
+
+primesUpTo' :: Integer -> Code Q [Integer]
+primesUpTo' n = go 2
+  where
+    go i
+      | i > n = [||[]||]
+      | isPrime i = [||i : $$(go $ i + 1)||]
+      | otherwise = go $ i + 1
