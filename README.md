@@ -32,7 +32,8 @@ To view and debug splice output outside the terminal on a per-file basis:
     {-# OPTIONS_GHC -ddump-to-file #-}
     ```
 
-2. Trigger a build, e.g. with `stack build`.
+2. Trigger a build. If using `stack ghci`, the dump file will appear alongside the source. If using
+   `stack build`, continue to the next step.
 
 3. Locate the `.dump-splices` file deep within the `.stack-work` directory. For example, the dump
    for the `Sandbox.Splices` module appears in `.stack-work/dist/{{env

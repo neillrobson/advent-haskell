@@ -36,4 +36,6 @@ precompute xs = do
       lastClause = Clause [VarP fallbackArgName] (NormalB fallbackBodyExp) []
       precomputedClauses = zipWith (\pat body -> Clause [pat] (NormalB body) []) patterns bodies
       clauses = precomputedClauses ++ [lastClause]
-  return [FunD name clauses]
+      fnType = AppT (AppT ArrowT (ConT $ mkName "Int")) (ConT $ mkName "Double")
+      signature = SigD name fnType
+  return [signature, FunD name clauses]
