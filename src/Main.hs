@@ -15,7 +15,7 @@ import GHC.Generics (Generic)
 import System.IO.Error (isDoesNotExistError)
 import Text.Printf (printf)
 
-data Config = Cfg {_cfgSession :: Maybe String} deriving (Generic)
+newtype Config = Cfg {_cfgSession :: Maybe String} deriving (Generic)
 
 configJSON :: A.Options
 configJSON =
@@ -51,7 +51,7 @@ configFile fp = do
         Right cfg -> return cfg
 
 session :: FilePath -> IO (Maybe String)
-session = (fmap _cfgSession) . configFile
+session = fmap _cfgSession . configFile
 
 --------------------------------------------------------------------------------
 
@@ -67,5 +67,5 @@ main = do
       let aocOpts = defaultAoCOpts aocUserAgent 2015 k
       prompt <- runAoC aocOpts $ AoCPrompt (mkDay_ 1)
       case prompt of
-        Left err -> putStrLn $ show err
+        Left err -> print err
         Right pMap -> putStrLn $ unpack $ pMap ! Part1
