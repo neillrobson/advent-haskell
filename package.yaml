@@ -21,8 +21,11 @@ dependencies:
   - bytestring
   - containers
   - deepseq
+  - directory
+  - filepath
   - text
   - template-haskell
+  - transformers
   - yaml
 
 ghc-options:
@@ -37,6 +40,8 @@ ghc-options:
   - -Wredundant-constraints
 
 default-extensions:
+  - OverloadedStrings
+  - RecordWildCards
   - TemplateHaskell
   - ViewPatterns
 
