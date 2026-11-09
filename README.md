@@ -4,6 +4,25 @@
 
 ## Setup
 
+To build the project: `stack build`
+
+To run `Main.hs`: `stack exec advent-haskell`
+
+To interactively run a specific day:
+
+```ghci
+-- Open a shell with `stack ghci`
+:l AOC2015.Day01
+run
+```
+
+### Advent of Code API
+
+> [!CAUTION]
+>
+> Right now, the AoC API has been removed from the codebase so that Neill can start with a simple
+> baseline and learn incrementally. As such, this documentation section is out of date.
+
 For the Advent of Code API to work, a session key needs to be stored in `/aoc-conf.yaml`.
 
 Use the following format for the file:
@@ -27,14 +46,14 @@ To view and debug splice output outside the terminal on a per-file basis:
 
 1. Add the following GHC options to the top of the file:
 
-    ```haskell
-    {-# OPTIONS_GHC -ddump-splices #-}
-    {-# OPTIONS_GHC -ddump-to-file #-}
-    ```
+   ```haskell
+   {-# OPTIONS_GHC -ddump-splices #-}
+   {-# OPTIONS_GHC -ddump-to-file #-}
+   ```
 
 2. Trigger a build. If using `stack ghci`, the dump file will appear alongside the source. If using
    `stack build`, continue to the next step.
 
 3. Locate the `.dump-splices` file deep within the `.stack-work` directory. For example, the dump
    for the `Sandbox.Splices` module appears in `.stack-work/dist/{{env
-   info}}/build/advent-haskell/advent-haskell-tmp/src/Sandbox/Splices.dump-splices`
+info}}/build/advent-haskell/advent-haskell-tmp/src/Sandbox/Splices.dump-splices`

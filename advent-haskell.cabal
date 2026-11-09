@@ -27,10 +27,6 @@ executable advent-haskell
   main-is: Main.hs
   other-modules:
       AOC2015.Day01
-      Core.Load
-      Sandbox.Primes
-      Sandbox.Splices
-      Sandbox.Templates
   hs-source-dirs:
       src
   default-extensions:
