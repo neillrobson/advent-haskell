@@ -40,6 +40,19 @@ generous sharing of their Haskell knowledge!
 
 ## Notes & Learnings
 
+### Evaluate & Force
+
+| Function   | Signature   | Purpose                                        |
+| ---------- | ----------- | ---------------------------------------------- |
+| `force`    | `a -> a`    | When this value is read, read it fully.        |
+| `evaluate` | `a -> IO a` | Read this value and put any errors into an IO. |
+
+On its own, `evaluate` will just read to weak-head normal form. For the string (character array)
+contents of files, WHNF is just the first cons operator. Invalid values are missed.
+
+On its own, `force` won't actually read (evaluate) its argument. It just says that the argument will
+be fully, deeply evaluated _whenever it is requested_.
+
 ### Template Haskell
 
 To view and debug splice output outside the terminal on a per-file basis:

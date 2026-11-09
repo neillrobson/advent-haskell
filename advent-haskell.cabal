@@ -28,6 +28,7 @@ executable advent-haskell
   other-modules:
       AOC2015.Day01
       Core
+      Sandbox.Eval
   hs-source-dirs:
       src
   default-extensions:
