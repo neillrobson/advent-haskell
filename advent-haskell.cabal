@@ -29,6 +29,7 @@ executable advent-haskell
       AOC2015.Day01
       Core
       Sandbox.Eval
+      Sandbox.Lock
   hs-source-dirs:
       src
   default-extensions:

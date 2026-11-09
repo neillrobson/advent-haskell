@@ -1,6 +1,6 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 
-module Sandbox.Eval () where
+module Sandbox.Eval (main) where
 
 import Control.DeepSeq (force)
 import Control.Exception (ArithException, evaluate, try)
