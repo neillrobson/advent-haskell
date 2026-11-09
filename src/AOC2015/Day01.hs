@@ -1,16 +1,9 @@
 module AOC2015.Day01 (run) where
 
-import Control.Applicative (Alternative (empty))
-import Control.DeepSeq (force)
-import Control.Exception (evaluate, tryJust)
-import Control.Monad (guard, (<=<))
+import Core (readFileMaybe)
 import Data.List (foldl')
-import System.IO.Error (isDoesNotExistError)
 
 --------------------------------------------------------------------------------
-
-eitherToMaybe :: (Alternative m) => Either e a -> m a
-eitherToMaybe = either (const empty) pure
 
 stripNewline :: String -> String
 stripNewline = reverse . dropWhile (== '\n') . reverse
@@ -19,9 +12,6 @@ stripNewline = reverse . dropWhile (== '\n') . reverse
 
 inputFilePath :: FilePath
 inputFilePath = "data/2015/01.txt"
-
-readFileMaybe :: FilePath -> IO (Maybe String)
-readFileMaybe = (traverse (evaluate . force) . eitherToMaybe) <=< tryJust (guard . isDoesNotExistError) . readFile
 
 --------------------------------------------------------------------------------
 
