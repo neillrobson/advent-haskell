@@ -10,15 +10,22 @@ data Part = Part1 | Part2
 
 main :: IO ()
 main = do
-  day <- getArgs >>= parse
-  putStrLn ("Hello world: " ++ show day)
+  args <- getArgs
+  (day, part) <- case parse args of
+    Left err -> fail err
+    Right dp -> return dp
+  runDay day part
 
-parse :: [String] -> IO Integer
-parse [] = fail "no arguments given"
-parse [_] = fail "not enough arguments given"
-parse (s : _) = case readMaybe s of
-  Nothing -> fail $ "not an integer: " ++ s
-  Just i -> return i
+parse :: [String] -> Either String (Day, Part)
+parse [] = Left "no arguments given"
+parse [_] = Left "not enough arguments given"
+parse (d : p : _) = do
+  di <- maybe (Left $ "cannot parse day: " ++ d) Right $ readMaybe d
+  part <- case p of
+    "a" -> Right Part1
+    "b" -> Right Part2
+    _ -> Left $ "invalid part: " ++ p
+  return (Day di, part)
 
 runDay :: Day -> Part -> IO ()
 runDay (dayInt -> 1) Part1 = run partA
