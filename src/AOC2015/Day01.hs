@@ -1,4 +1,4 @@
-module AOC2015.Day01 (run) where
+module AOC2015.Day01 (partA, partB, run) where
 
 import Core (readFileMaybe)
 import Data.List (foldl')
