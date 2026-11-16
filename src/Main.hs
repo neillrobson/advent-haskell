@@ -1,6 +1,7 @@
 module Main (main) where
 
 import System.Environment (getArgs)
+import Text.Read (readMaybe)
 
 main :: IO ()
 main = do
@@ -9,4 +10,6 @@ main = do
 
 parse :: [String] -> IO Integer
 parse [] = fail "no arguments given"
-parse (s : _) = readIO s
+parse (s : _) = case readMaybe s of
+  Nothing -> fail $ "not an integer: " ++ s
+  Just i -> return i
