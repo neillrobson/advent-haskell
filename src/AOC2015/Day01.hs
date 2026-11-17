@@ -2,6 +2,7 @@ module AOC2015.Day01 (day01a, day01b) where
 
 import Core ((:~>) (MkSol))
 import Data.List (foldl')
+import Util (stripNewline)
 
 day01a :: String :~> Integer
 day01a = MkSol (Just . stripNewline) (Just . partA) show
@@ -10,9 +11,6 @@ day01b :: String :~> Integer
 day01b = MkSol (Just . stripNewline) (Just . partB) show
 
 --------------------------------------------------------------------------------
-
-stripNewline :: String -> String
-stripNewline = reverse . dropWhile (== '\n') . reverse
 
 partA :: String -> Integer
 partA = foldl' go 0

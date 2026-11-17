@@ -30,6 +30,7 @@ executable advent-haskell
       Core
       Sandbox.Eval
       Sandbox.Lock
+      Util
   hs-source-dirs:
       src
   default-extensions:

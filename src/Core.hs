@@ -1,10 +1,7 @@
-module Core (eitherToMaybe, readFileMaybe, (:~>) (..), run) where
+module Core ((:~>) (..), run) where
 
-import Control.Applicative (Alternative (empty))
-import Control.DeepSeq (force)
-import Control.Exception (evaluate, tryJust)
-import Control.Monad (guard, (<=<))
-import System.IO.Error (isDoesNotExistError)
+import Control.Monad ((<=<))
+import Util (readFileMaybe)
 
 data a :~> b = MkSol
   { sParse :: String -> Maybe a,
@@ -13,7 +10,7 @@ data a :~> b = MkSol
   }
 
 execSol :: a :~> b -> String -> Maybe String
-execSol sol = fmap (sShow sol) . (sSolve sol <=< sParse sol)
+execSol MkSol {..} = fmap sShow . (sSolve <=< sParse)
 
 run :: FilePath -> a :~> b -> IO ()
 run path sol = do
@@ -23,9 +20,3 @@ run path sol = do
     Just s -> case execSol sol s of
       Nothing -> fail "no solution found"
       Just o -> putStrLn o
-
-eitherToMaybe :: (Alternative m) => Either e a -> m a
-eitherToMaybe = either (const empty) pure
-
-readFileMaybe :: FilePath -> IO (Maybe String)
-readFileMaybe = (traverse (evaluate . force) . eitherToMaybe) <=< tryJust (guard . isDoesNotExistError) . readFile
