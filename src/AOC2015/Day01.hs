@@ -28,9 +28,7 @@ run f = do
   input <- readFileMaybe inputFilePath
   case input of
     Nothing -> putStrLn "cannot read input"
-    Just (stripNewline -> inp) -> do
-      putStrLn inp
-      print $ f inp
+    Just (stripNewline -> inp) -> print $ f inp
 
 --------------------------------------------------------------------------------
 
