@@ -1,12 +1,17 @@
 module Main (main) where
 
-import AOC2015.Day01 (partA, partB, run)
+import AOC2015.Day01 (day01a, day01b)
+import Core (run)
 import System.Environment (getArgs)
 import Text.Read (readMaybe)
 
 newtype Day = Day {dayInt :: Integer}
 
 data Part = Part1 | Part2
+
+files :: Day -> FilePath
+files (dayInt -> 1) = "data/2015/01.txt"
+files _ = undefined
 
 main :: IO ()
 main = do
@@ -28,6 +33,6 @@ parse (d : p : _) = do
   return (Day di, part)
 
 runDay :: Day -> Part -> IO ()
-runDay (dayInt -> 1) Part1 = run partA
-runDay (dayInt -> 1) Part2 = run partB
+runDay (dayInt -> 1) Part1 = run (files $ Day 1) day01a
+runDay (dayInt -> 1) Part2 = run (files $ Day 1) day01b
 runDay _ _ = fail "not yet implemented"

@@ -43,6 +43,7 @@ default-extensions:
   - OverloadedStrings
   - RecordWildCards
   - TemplateHaskell
+  - TypeOperators
   - ViewPatterns
 
 executables:

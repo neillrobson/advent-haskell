@@ -1,19 +1,18 @@
-module AOC2015.Day01 (partA, partB, run) where
+module AOC2015.Day01 (day01a, day01b) where
 
-import Core (readFileMaybe)
+import Core ((:~>) (MkSol))
 import Data.List (foldl')
+
+day01a :: String :~> Integer
+day01a = MkSol (Just . stripNewline) (Just . partA) show
+
+day01b :: String :~> Integer
+day01b = MkSol (Just . stripNewline) (Just . partB) show
 
 --------------------------------------------------------------------------------
 
 stripNewline :: String -> String
 stripNewline = reverse . dropWhile (== '\n') . reverse
-
---------------------------------------------------------------------------------
-
-inputFilePath :: FilePath
-inputFilePath = "data/2015/01.txt"
-
---------------------------------------------------------------------------------
 
 partA :: String -> Integer
 partA = foldl' go 0
@@ -22,15 +21,6 @@ partA = foldl' go 0
       | c == '(' = i + 1
       | c == ')' = i - 1
       | otherwise = undefined
-
-run :: (String -> Integer) -> IO ()
-run f = do
-  input <- readFileMaybe inputFilePath
-  case input of
-    Nothing -> putStrLn "cannot read input"
-    Just (stripNewline -> inp) -> print $ f inp
-
---------------------------------------------------------------------------------
 
 partB :: String -> Integer
 partB = go (0 :: Integer) 0
