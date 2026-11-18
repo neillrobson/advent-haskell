@@ -1,7 +1,7 @@
 module Main (main) where
 
 import AOC2015.Day01 (day01a, day01b)
-import AOC2015.Day02 (day02a)
+import AOC2015.Day02 (day02a, day02b)
 import Core (run)
 import System.Environment (getArgs)
 import Text.Read (readMaybe)
@@ -38,4 +38,5 @@ runDay :: Day -> Part -> IO ()
 runDay (dayInt -> 1) Part1 = run (files $ Day 1) day01a
 runDay (dayInt -> 1) Part2 = run (files $ Day 1) day01b
 runDay (dayInt -> 2) Part1 = run (files $ Day 2) day02a
+runDay (dayInt -> 2) Part2 = run (files $ Day 2) day02b
 runDay _ _ = fail "not yet implemented"
