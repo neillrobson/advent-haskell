@@ -1,6 +1,7 @@
 module Main (main) where
 
 import AOC2015.Day01 (day01a, day01b)
+import AOC2015.Day02 (day02a)
 import Core (run)
 import System.Environment (getArgs)
 import Text.Read (readMaybe)
@@ -11,6 +12,7 @@ data Part = Part1 | Part2
 
 files :: Day -> FilePath
 files (dayInt -> 1) = "data/2015/01.txt"
+files (dayInt -> 2) = "data/2015/02.txt"
 files _ = undefined
 
 main :: IO ()
@@ -35,4 +37,5 @@ parse (d : p : _) = do
 runDay :: Day -> Part -> IO ()
 runDay (dayInt -> 1) Part1 = run (files $ Day 1) day01a
 runDay (dayInt -> 1) Part2 = run (files $ Day 1) day01b
+runDay (dayInt -> 2) Part1 = run (files $ Day 2) day02a
 runDay _ _ = fail "not yet implemented"

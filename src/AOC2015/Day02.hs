@@ -1,11 +1,23 @@
-module AOC2015.Day02 () where
+module AOC2015.Day02 (day02a) where
+
+import Core ((:~>) (MkSol, sParse, sShow, sSolve))
+import Text.Read (readMaybe)
+
+day02a :: [[Integer]] :~> Integer
+day02a =
+  MkSol
+    { sParse = parseDimensions,
+      sSolve = Just . wrapBoxes,
+      sShow = show
+    }
 
 --------------------------------------------------------------------------------
 
+parseDimensions :: String -> Maybe [[Integer]]
+parseDimensions = traverse parseDimension . lines
+
 parseDimension :: String -> Maybe [Integer]
-parseDimension s = do
-  let dims = splitBy (== 'x') s
-  return []
+parseDimension s = traverse readMaybe $ splitBy (== 'x') s
 
 splitBy :: (Char -> Bool) -> String -> [String]
 splitBy test s = case dropWhile test s of
