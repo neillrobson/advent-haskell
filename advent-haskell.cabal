@@ -35,6 +35,7 @@ executable advent-haskell
   hs-source-dirs:
       src
   default-extensions:
+      GADTs
       OverloadedStrings
       RecordWildCards
       TemplateHaskell

@@ -1,4 +1,4 @@
-module Core ((:~>) (..), run) where
+module Core ((:~>) (..), run, runSome, SomeSolution (..)) where
 
 import Control.Monad ((<=<))
 import Util (readFileMaybe)
@@ -8,6 +8,8 @@ data a :~> b = MkSol
     sSolve :: a -> Maybe b,
     sShow :: b -> String
   }
+
+data SomeSolution = forall a b. MkSomeSol (a :~> b)
 
 execSol :: a :~> b -> String -> Maybe String
 execSol MkSol {..} = fmap sShow . (sSolve <=< sParse)
@@ -20,3 +22,6 @@ run path sol = do
     Just s -> case execSol sol s of
       Nothing -> fail "no solution found"
       Just o -> putStrLn o
+
+runSome :: FilePath -> SomeSolution -> IO ()
+runSome path (MkSomeSol sol) = run path sol
