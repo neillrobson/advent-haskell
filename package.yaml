@@ -41,9 +41,11 @@ ghc-options:
 
 default-extensions:
   - GADTs
+  - LambdaCase
   - OverloadedStrings
   - RecordWildCards
   - TemplateHaskell
+  - TupleSections
   - TypeOperators
   - ViewPatterns
 

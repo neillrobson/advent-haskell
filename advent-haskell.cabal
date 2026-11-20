@@ -31,14 +31,17 @@ executable advent-haskell
       Core
       Sandbox.Eval
       Sandbox.Lock
+      Sandbox.State
       Util
   hs-source-dirs:
       src
   default-extensions:
       GADTs
+      LambdaCase
       OverloadedStrings
       RecordWildCards
       TemplateHaskell
+      TupleSections
       TypeOperators
       ViewPatterns
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
