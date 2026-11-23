@@ -23,6 +23,7 @@ dependencies:
   - deepseq
   - directory
   - filepath
+  - finite-typelits
   - text
   - template-haskell
   - transformers
@@ -40,9 +41,11 @@ ghc-options:
   - -Wredundant-constraints
 
 default-extensions:
+  - DataKinds
   - GADTs
   - LambdaCase
   - OverloadedStrings
+  - PatternSynonyms
   - RecordWildCards
   - TemplateHaskell
   - TupleSections

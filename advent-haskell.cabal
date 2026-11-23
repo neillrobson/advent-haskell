@@ -36,9 +36,11 @@ executable advent-haskell
   hs-source-dirs:
       src
   default-extensions:
+      DataKinds
       GADTs
       LambdaCase
       OverloadedStrings
+      PatternSynonyms
       RecordWildCards
       TemplateHaskell
       TupleSections
@@ -54,6 +56,7 @@ executable advent-haskell
     , deepseq
     , directory
     , filepath
+    , finite-typelits
     , template-haskell
     , text
     , transformers
