@@ -12,16 +12,20 @@ newtype State s a = MkState (s -> (a, s))
 
 instance Functor (State s) where
   fmap :: (a -> b) -> State s a -> State s b
-  fmap f (MkState st) = MkState $ \s -> let (a, s') = st s in (f a, s')
+  fmap f = (>>= return . f)
+
+-- fmap f (MkState st) = MkState $ \s -> let (a, s') = st s in (f a, s')
 
 instance Applicative (State s) where
   pure :: a -> State s a
   pure a = MkState (a,)
   (<*>) :: State s (a -> b) -> State s a -> State s b
-  (MkState sab) <*> (MkState sa) = MkState $ \s ->
-    let (ab, s') = sab s
-        (a, s'') = sa s'
-     in (ab a, s'')
+  stab <*> sta = stab >>= \ab -> ab <$> sta
+
+-- (MkState sab) <*> (MkState sa) = MkState $ \s ->
+--   let (ab, s') = sab s
+--       (a, s'') = sa s'
+--    in (ab a, s'')
 
 -- Alternative doesn't make sense for a "pure" State type, because there isn't a
 -- failure mode across all output values! See the "Parser" type below.
