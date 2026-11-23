@@ -32,6 +32,13 @@ instance Alternative (State s) where
   (<|>) :: State s a -> State s a -> State s a
   (<|>) = undefined
 
+instance Monad (State s) where
+  (>>=) :: State s a -> (a -> State s b) -> State s b
+  (MkState sa) >>= f = MkState $ \s ->
+    let (a, s') = sa s
+        (MkState sb) = f a
+     in sb s'
+
 --------------------------------------------------------------------------------
 
 newtype Parser s a = MkParser (s -> Maybe (a, s))
@@ -57,3 +64,10 @@ instance Alternative (Parser s) where
 
 -- some v = (:) <$> v <*> many v
 -- many v = some v <|> pure []
+
+instance Monad (Parser s) where
+  (>>=) :: Parser s a -> (a -> Parser s b) -> Parser s b
+  (MkParser sa) >>= f = MkParser $ \s -> do
+    (a, s') <- sa s
+    let (MkParser sb) = f a
+    sb s'
