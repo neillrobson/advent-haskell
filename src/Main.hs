@@ -7,14 +7,14 @@ import Core (SomeSolution (MkSomeSol), runSome)
 import Data.Map (Map)
 import qualified Data.Map as M
 import System.Environment (getArgs)
+import System.FilePath ((<.>))
+import Text.Printf (printf)
 import Text.Read (readMaybe)
 
 type ChallengeMap = Map Day (Map Part SomeSolution)
 
-files :: Day -> FilePath
-files (dayInt -> 1) = "data/2015/01.txt"
-files (dayInt -> 2) = "data/2015/02.txt"
-files _ = undefined
+inputPath :: Integer -> Day -> FilePath
+inputPath year (dayInt -> d) = printf "data/%04d/%02d" year d <.> ".txt"
 
 challenges :: ChallengeMap
 challenges =
@@ -60,4 +60,4 @@ runChallenge cm day part = do
   someSol <- case M.lookup day cm >>= M.lookup part of
     Just ss -> pure ss
     Nothing -> fail "not yet implemented"
-  runSome (files day) someSol
+  runSome (inputPath 2015 day) someSol
