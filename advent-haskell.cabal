@@ -28,6 +28,7 @@ executable advent-haskell
   other-modules:
       AOC2015.Day01
       AOC2015.Day02
+      Config
       Core
       Sandbox.Eval
       Sandbox.Lock
@@ -37,13 +38,16 @@ executable advent-haskell
       src
   default-extensions:
       DataKinds
+      DeriveGeneric
       GADTs
+      InstanceSigs
       LambdaCase
       OverloadedStrings
       PatternSynonyms
       RecordWildCards
       TemplateHaskell
       TupleSections
+      TypeApplications
       TypeOperators
       ViewPatterns
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
@@ -53,6 +57,7 @@ executable advent-haskell
     , base >=4.7 && <5
     , bytestring
     , containers
+    , data-default
     , deepseq
     , directory
     , filepath

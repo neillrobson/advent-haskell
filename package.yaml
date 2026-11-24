@@ -20,6 +20,7 @@ dependencies:
   - base >=4.7 && <5
   - bytestring
   - containers
+  - data-default
   - deepseq
   - directory
   - filepath
@@ -42,13 +43,16 @@ ghc-options:
 
 default-extensions:
   - DataKinds
+  - DeriveGeneric
   - GADTs
+  - InstanceSigs
   - LambdaCase
   - OverloadedStrings
   - PatternSynonyms
   - RecordWildCards
   - TemplateHaskell
   - TupleSections
+  - TypeApplications
   - TypeOperators
   - ViewPatterns
 
